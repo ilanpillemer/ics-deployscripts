@@ -495,8 +495,10 @@ if [ "${DEPLOY_TYPE}" == "red_black" ]; then
     deploy_red_black
 elif [ "${DEPLOY_TYPE}" == "clean" ]; then
     clean
+elif [ "${DEPLOY_TYPE}" == "simple" ]; then
+    deploy_simple
 else
-    log_and_echo "$WARN" "Currently only supporting red_black deployment strategy"
+    log_and_echo "$WARN" "Currently only supporting red_black,clean, and simple deployment strategies"
     log_and_echo "$WARN" "If you would like another strategy please fork https://github.com/Osthanes/deployscripts.git and submit a pull request"
     log_and_echo "$WARN" "Defaulting to red_black deploy"
     deploy_red_black
