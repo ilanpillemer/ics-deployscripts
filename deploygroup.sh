@@ -49,11 +49,11 @@ wait_for_group (){
             STATUS=$require_value
         fi
         log_and_echo "${WAITING_FOR} is ${STATUS}"
-        if [ "${STATUS}" == "CREATE_COMPLETE" ] || [ "${STATUS}" == "\"CREATE_COMPLETE\"" ]; then
+        if [ "${STATUS}" == "CREATE_COMPLETE" ] || [ "${STATUS}" == '"CREATE_COMPLETE"' ]; then
             return 0
-        elif [ "${STATUS}" == "CREATE_FAILED" ] || [ "${STATUS}" == "\"CREATE_FAILED\"" ]; then
+        elif [ "${STATUS}" == "CREATE_FAILED" ] || [ "${STATUS}" == '"CREATE_FAILED"' ]; then
             return 2
-        elif [ "${STATUS}" == "FAILED" ] || [ "${STATUS}" == "\"FAILED\"" ]; then
+        elif [ "${STATUS}" == "FAILED" ] || [ "${STATUS}" == '"FAILED"' ]; then
             return 3
         fi
         sleep 3
@@ -230,7 +230,7 @@ deploy_group() {
     fi
 
     # create the group and check the results
-    log_and_echo "creating group: $IC_COMMAND group create --name ${MY_GROUP_NAME} ${BIND_PARMS} ${PUBLISH_PORT} ${MEMORY} ${OPTIONAL_ARGS} --desired ${DESIRED_INSTANCES} --min ${MIN_INSTANCES} --max ${MAX_INSTANCES} ${AUTO} ${IMAGE_NAME}"
+    log_and_echo "creating group: $IC_COMMAND group create --name ${MY_GROUP_NAME} ${PUBLISH_PORT} ${MEMORY} ${OPTIONAL_ARGS} ${BIND_PARMS} --desired ${DESIRED_INSTANCES} --min ${MIN_INSTANCES} --max ${MAX_INSTANCES} ${AUTO} ${IMAGE_NAME}"
     ice_retry group create --name ${MY_GROUP_NAME} ${PUBLISH_PORT} ${MEMORY} ${OPTIONAL_ARGS} ${BIND_PARMS} --desired ${DESIRED_INSTANCES} --min ${MIN_INSTANCES} --max ${MAX_INSTANCES} ${AUTO} ${IMAGE_NAME}
     local RESULT=$?
     if [ $RESULT -ne 0 ]; then
